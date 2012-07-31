@@ -2,7 +2,7 @@
 
 Storyteller Pagination 0.0.1
 
-©2012 Story Arc, Inc.
+©2012 Story Arc Corp
 
 */
 
@@ -20,11 +20,9 @@ Storyteller Pagination 0.0.1
 				var $this = $( this );
 				var options = options || {};
 				var data = {};
-				data.parameter = options.parameter || $this.data('parameter') || 'p='+ PARAMETER_TOKEN;
-				var parameter_capture_regex = new RegExp( data.parameter.replace( PARAMETER_TOKEN, '([0-9]*)' ) );
-				data.parameter_regex = new RegExp( data.parameter.replace( PARAMETER_TOKEN, '[0-9]*' ) );
+				data.url = options.url || $this.data('url') || '?p='+ PARAMETER_TOKEN;
 				data.type = options.type || $this.data('type') || 'page';
-				data.start = options.start || parseInt( $this.data('start') ) || parseInt( parameter_capture_regex.exec( window.location.href )[1] ) || 1;
+				data.start = options.start || parseInt( $this.data('start') ) || 1;
 				data.page = data.start + 1;
 				if( data.type === 'skip' )
 					data.skip = options.skip || parseInt( $this.data('skip') ) || data.start + $this.children('ul').children('li').length;
@@ -58,7 +56,7 @@ Storyteller Pagination 0.0.1
 				var $this = $(this);
 				var data = $this.data('st-pagination');
 				
-				$this.children('ul').append( data.cache.next );
+				$this.children('ul.st-items').append( data.cache.next );
 				data.skip += data.cache.next.length;
 				data.page++;
 				$this.stPagination( 'checkNext' );
@@ -74,10 +72,9 @@ Storyteller Pagination 0.0.1
 				
 				var $this = $(this);
 				var data = $this.data('st-pagination');
-				var next_integer = ( data.type === 'page' )? data.page: data.skip;
-				var new_parameter = data.parameter.replace( PARAMETER_TOKEN, next_integer );
-				var next_page_url = window.location.href.replace( data.parameter_regex, new_parameter );
-				var next_page_url_filtered = next_page_url +' '+ data.selector +' > ul > li';
+				var next_integer = data[data.type];
+				var next_page_url = data.url.replace( ':p', next_integer );
+				var next_page_url_filtered = next_page_url +' '+ data.selector +' > ul.st-items > li';
 				
 				$this.addClass('loading');
 				

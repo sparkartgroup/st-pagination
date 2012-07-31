@@ -3,13 +3,15 @@ st-pagination
 
 Simple pagination using jQuery.
 
+Storyteller Pagination enables you to create "endless" pagination by appending the contents of the next page in a set to the current one. It will asynchronously request the contents of the next page, filter them, and cache them until the "next" button is clicked.
+
 ### Usage
 
-In order to use Storyteller Pagination, your page needs to be capable of loading dynamic content using a URL parameter (like /page/5, ?p=5, or ?skip=25). Your dynamic content needs to be in a `<div>` with a `<ul>` containing individual items as `<li>`s. Finally, your markup needs to have the appropriate classes and data defined:
+In order to use Storyteller Pagination, your page needs to be capable of loading dynamic content using a URL parameter (like /page/5, ?p=5, or ?skip=25). Your dynamic content needs to be in a `<div>` with a `<ul>` containing individual items as `<li>`s. Finally, your markup needs to have the `st-pagination`, `st-items`, and `st-next` classes, like so:
 
 ```html
 <div id="content" class="st-pagination" data-parameter="page/:p">
-	<ul>
+	<ul class="st-items">
 		<!-- Your rendering loop should be here -->
 		<li><!-- Your content in here --></li>
 	</ul>
@@ -17,7 +19,7 @@ In order to use Storyteller Pagination, your page needs to be capable of loading
 </div>
 ```
 
-This markup is the bare minumum necessary for Storyteller Pagination to work. While nothing can be removed, a great deal can be added:
+This markup is the bare minumum necessary for Storyteller Pagination to work. Please note that the "next" link does not necessarily need to be an `<a>`, it just needs the `st-next` class. From here, you can add basically any markup you want!
 
 ```html
 <div id="content" class="st-pagination" data-parameter="page/:p">
@@ -52,12 +54,11 @@ $(function(){
 
 ### Configuration
 
-While most of Storyteller Pagination's options are set automatically, this is not always ideal. Configuration options can be set in two ways: through `data` attributes on the parent `.st-pagination` element, or with a configuration object passed directly to the plugin.
+**Configuration options can be set in two ways:** through `data` attributes on the parent `.st-pagination` element, or with a configuration object passed directly to the plugin.
 
-* **parameter** - A simple representation of the parameter that changes during pagination. Replace the numeric portion with `:p`. *This parameter is required*
-* **type** - Determines the type of pagination--can be `page` or `skip`. Is set to `page` by default.
-* **start** - What page number to start paginating from. Will be drawn from the URL if not specified.
-* **skip** - What skip number to start paginating from. Will be determined by results returned if not specified.
+* **parameter** - ( default "?p=:p" ) The URL for the next page in the set, replacing the page number with ":p"
+* **type** - ( default "page" ) Determines the type of pagination--can be `page`, for APIs that use page numbers, or `skip`, for APIs that skip a certain number of results.
+* **start** - ( default "1" ) What page/item number to start paginating from.
 
 ```html
 <!-- Configuring a "skip" paginator with a default skip start -->

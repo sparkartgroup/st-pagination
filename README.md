@@ -26,7 +26,7 @@ This markup is the bare minumum necessary for Storyteller Pagination to work. Pl
 	<h1>My YouTube Favorites</h1>
 	<sub>A list of my favorite videos from all across YouTube!</sub>
 	<a class="st-next" href="#next">Next</a>
-	<ul>
+	<ul class="st-items">
 		{{#favorites}}
 		<li>
 			<h4>{{title}}</h4>

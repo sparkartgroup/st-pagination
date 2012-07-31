@@ -8,6 +8,8 @@ Storyteller Pagination 0.0.1
 
 (function( $ ){
 	
+	"use strict";
+	
 	var PARAMETER_TOKEN = ':p';
 	
 	var methods = {

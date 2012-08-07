@@ -1,6 +1,6 @@
 /*
 
-Storyteller Pagination 0.0.1
+Storyteller Pagination 0.0.2
 
 ©2012 Story Arc Corp
 
@@ -17,32 +17,45 @@ Storyteller Pagination 0.0.1
 		// Set up the plugin
 		initialize: function( options ){
 			
+			options = options || {};
+			
 			return this.each( function(){
 				
 				var $this = $( this );
-				var options = options || {};
 				var data = {};
 				data.url = options.url || $this.data('url') || '?p='+ PARAMETER_TOKEN;
 				data.type = options.type || $this.data('type') || 'page';
-				data.start = options.start || parseInt( $this.data('start') ) || 1;
+				data.start = options.start || parseInt( $this.data('start'), 10 ) || 1;
 				data.page = data.start + 1;
-				if( data.type === 'skip' )
-					data.skip = options.skip || parseInt( $this.data('skip') ) || data.start + $this.children('ul').children('li').length;
+				if( data.type === 'skip' ){
+					data.skip = options.skip || parseInt( $this.data('skip'), 10 ) || data.start + $this.children('ul').children('li').length;
+				}	
 				data.selector = '#'+ $this.attr('id');
 				data.cache = {
 					next: null
 				};
 				
+				// Bind passed events
+				if( options.events ){
+					for( var event in options.events ){
+						if( options.events.hasOwnProperty( event ) ){
+							var method = options.events[event];
+							$this.on( event, method );
+						}
+					}
+				}
+				
 				$this.data( 'st-pagination', data );
-				$this.stPagination( 'checkNext' );
+				$this.stPagination( 'checkNext' );	
 				
 				// Bind "next" link
 				$this.on( 'click.st-pagination', '.st-next', function( e ){
 				
 					e.preventDefault();
 					
-					if( !$this.is('.loading') && !$this.is('.complete') )
+					if( !$this.is('.loading') && !$this.is('.complete') ){
 						$this.stPagination( 'next' );
+					}	
 					
 				});
 				
@@ -62,6 +75,8 @@ Storyteller Pagination 0.0.1
 				data.skip += data.cache.next.length;
 				data.page++;
 				$this.stPagination( 'checkNext' );
+				
+				$this.trigger( 'next', $this );	
 				
 			});
 			
@@ -88,6 +103,10 @@ Storyteller Pagination 0.0.1
 						.removeClass('loading')
 						.toggleClass( 'complete', ( data.cache.next.length === 0 ) );
 					
+					if( data.cache.next.length === 0 ){
+						$this.trigger( 'complete', $this );
+					}
+					
 				});
 				
 			});
@@ -96,6 +115,8 @@ Storyteller Pagination 0.0.1
 		
 		// Destroy the plugin
 		destroy: function(){
+			
+			var $this = $(this);	
 			
 			$this.off('.st-pagination');
 			$this.removeData();
@@ -107,10 +128,12 @@ Storyteller Pagination 0.0.1
 	// Attach stPagination to jQuery
 	$.fn.stPagination = function( method ){
 		
-		if( methods[method] )
+		if( methods[method] ){
 			return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
-		else if( typeof method === 'object' || ! method )
+		}
+		else if( typeof method === 'object' || ! method ){
 			return methods.initialize.apply( this, arguments );
+		}	
 		
 	};
 

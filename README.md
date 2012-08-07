@@ -56,9 +56,9 @@ $(function(){
 
 **Configuration options can be set in two ways:** through `data` attributes on the parent `.st-pagination` element, or with a configuration object passed directly to the plugin.
 
-* **url** - ( default "?p=:p" ) The URL for the next page in the set, replacing the page number with ":p"
-* **type** - ( default "page" ) Determines the type of pagination--can be `page`, for APIs that use page numbers, or `skip`, for APIs that skip a certain number of results.
-* **start** - ( default "1" ) What page/item number to start paginating from.
+* **url** ( default "?p=:p" ) - The URL for the next page in the set, replacing the page number with ":p"
+* **type** ( default "page" ) - Determines the type of pagination--can be `page`, for APIs that use page numbers, or `skip`, for APIs that skip a certain number of results.
+* **start** ( default "1" ) - What page/item number to start paginating from.
 
 ```html
 <!-- Configuring a "skip" paginator with a default skip start -->
@@ -73,3 +73,30 @@ $('#content').stPagination({
 	start: 1
 });
 ```
+
+### Events
+
+Storyteller Pagination makes some events available for better integration. The events are as follows:
+
+* **next** ( event, element ) - Fires when the 'next' method is triggered, either by a user click or manually.
+* **complete** ( event, element ) - Fires when the next page no longer returns results and the next button is disabled.
+
+These events can be bound in two ways: with an `events` object in the `stPagination()` configuration object, or with jQuery's normal event bindings.
+
+```javascript
+// Binding inside the configuration object
+$('.st-pagination').stPagination({
+	events: {
+		next: function( event, element ){ console.log( 'next', event, element ); },
+		complete: function( event, element ){ console.log( 'complete', event, element ); }
+	}
+});
+
+// Binding with normal events
+$('.st-pagination').on({
+	next: function( event, element ){ console.log( 'next', event, element ); },
+	complete: function( event, element ){ console.log( 'complete', event, element ); }
+});
+```
+
+*Events cannot be bound using `data` attributes.

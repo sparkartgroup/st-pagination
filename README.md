@@ -19,7 +19,7 @@ In order to use Storyteller Pagination, your page needs to be capable of loading
 </div>
 ```
 
-This markup is the bare minumum necessary for Storyteller Pagination to work. Please note that the "next" link does not necessarily need to be an `<a>`, it just needs the `st-next` class. From here, you can add basically any markup you want!
+This markup is the bare minumum necessary for Storyteller Pagination to work. **An id is required on the pagination div**. Please note that the "next" link does not necessarily need to be an `<a>`, it just needs the `st-next` class. From here, you can add basically any markup you want!
 
 ```html
 <div id="content" class="st-pagination" data-url="/page/:p">

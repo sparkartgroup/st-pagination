@@ -1,6 +1,6 @@
 /*
 
-Storyteller Pagination 0.0.2
+Storyteller Pagination 0.0.3
 
 ©2012 Story Arc Corp
 
@@ -27,8 +27,14 @@ Storyteller Pagination 0.0.2
 				data.type = options.type || $this.data('type') || 'page';
 				data.start = options.start || parseInt( $this.data('start'), 10 ) || 1;
 				data.page = data.start + 1;
+				options.selectors = options.selectors || {};
+				data.selectors = {
+					items: options.selectors.items || '.st-items',
+					next: options.selectors.next || '.st-next'
+				};
+				data.selectors.item = options.selectors.item || data.selectors.items +' > *';
 				if( data.type === 'skip' ){
-					data.skip = options.skip || parseInt( $this.data('skip'), 10 ) || data.start + $this.children('ul').children('li').length;
+					data.skip = options.skip || parseInt( $this.data('skip'), 10 ) || data.start + $this.find( data.selectors.items ).length;
 				}	
 				data.selector = '#'+ $this.attr('id');
 				data.cache = {
@@ -49,7 +55,7 @@ Storyteller Pagination 0.0.2
 				$this.stPagination( 'checkNext' );	
 				
 				// Bind "next" link
-				$this.on( 'click.st-pagination', '.st-next', function( e ){
+				$this.on( 'click.st-pagination', data.selectors.next, function( e ){
 				
 					e.preventDefault();
 					
@@ -71,7 +77,7 @@ Storyteller Pagination 0.0.2
 				var $this = $(this);
 				var data = $this.data('st-pagination');
 				
-				$this.children('ul.st-items').append( data.cache.next );
+				$this.find( data.selectors.items +':first' ).append( data.cache.next );
 				data.skip += data.cache.next.length;
 				data.page++;
 				$this.stPagination( 'checkNext' );
@@ -91,14 +97,12 @@ Storyteller Pagination 0.0.2
 				var data = $this.data('st-pagination');
 				var next_integer = data[data.type];
 				var next_page_url = data.url.replace( ':p', next_integer );
-				var next_page_url_filtered = next_page_url +' '+ data.selector +' > ul.st-items > li';
+				var next_page_url_filtered = next_page_url +' '+ data.selector +' '+ data.selectors.item;
 				
 				$this.addClass('loading');
-				
 				$('<div />').load( next_page_url_filtered, function(){
-					
-					data.cache.next = $(this).children().unwrap();
-					
+
+					data.cache.next = $(this).children();
 					$this
 						.removeClass('loading')
 						.toggleClass( 'complete', ( data.cache.next.length === 0 ) );

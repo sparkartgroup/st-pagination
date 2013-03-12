@@ -59,6 +59,7 @@ $(function(){
 * **url** ( default "?p=:p" ) - The URL for the next page in the set, replacing the page number with ":p"
 * **type** ( default "page" ) - Determines the type of pagination--can be `page`, for APIs that use page numbers, or `skip`, for APIs that skip a certain number of results.
 * **start** ( default "1" ) - What page/item number to start paginating from.
+* **selectors** - An object of selector names and selector strings. `next` is the selector for the 'next' button, `items` is the selector for the container which items are appended to, and `item` is the selector for individual items. If you define these, classes like `st-next` and `st-items` are no longer mandatory (as your selectors will be used instead).
 
 ```html
 <!-- Configuring a "skip" paginator with a default skip start -->

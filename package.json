@@ -7,5 +7,15 @@
     "grunt-contrib-uglify": "~0.2.4",
     "grunt-browserify": "~1.2.9",
     "tape": "~2.0.0"
+  },
+  "testling": {
+    "files": "test/index.js",
+    "browsers": [
+      "ie/6..latest",
+      "ff/20..latest",
+      "chrome/25..latest",
+      "safari/4.0..latest",
+      "opera/11.0..latest"
+    ]
   }
 }

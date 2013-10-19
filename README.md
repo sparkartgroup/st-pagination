@@ -3,6 +3,8 @@ st-pagination
 
 Simple pagination using jQuery.
 
+[![browser support](https://ci.testling.com/SparkartGroupInc/st-pagination.png)](https://ci.testling.com/SparkartGroupInc/st-pagination)
+
 Storyteller Pagination enables you to create "endless" pagination by appending the contents of the next page in a set to the current one. It will asynchronously request the contents of the next page, filter them, and cache them until the "next" button is clicked.
 
 ### Usage

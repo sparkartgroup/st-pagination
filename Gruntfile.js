@@ -5,6 +5,21 @@ module.exports = function( grunt ){
 	'   Generated on <%= grunt.template.today("yyyy-mm-dd \'at\' HH:MM:ss") %> */\n\n';
 
 	grunt.initConfig({
+		browserify: {
+			test: {
+				options: {
+					shim: {
+						jquery: {
+							path: 'test/assets/jquery.js',
+							exports: '$'
+						}
+					}
+				},
+				files: {
+					'test/assets/test.js': ['test/index.js']
+				}
+			}
+		},
 		uglify: {
 			build: {
 				options: {
@@ -23,7 +38,7 @@ module.exports = function( grunt ){
 	});
 
 	grunt.registerTask( 'default', ['dev'] );
-	grunt.registerTask( 'build', ['uglify'] );
+	grunt.registerTask( 'build', ['browserify','uglify'] );
 	grunt.registerTask( 'dev', ['build'] );
 
 };

@@ -1,10 +1,4 @@
-/*
-
-Storyteller Pagination 0.0.3
-
-©2012 Story Arc Corp
-
-*/
+/* jQuery ST-Pagination v0.0.3 */
 
 (function( $ ){
 	

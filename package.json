@@ -2,6 +2,19 @@
   "name": "st-pagination",
   "version": "0.0.3",
   "description": "Simple pagination using jQuery",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SparkartGroupInc/st-pagination.git"
+  },
+  "author": {
+    "name": "Timothy Kempf",
+    "email": "tim@sparkart.com",
+    "url": "http://sparkart.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SparkartGroupInc/st-pagination/issues"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "~0.2.4",

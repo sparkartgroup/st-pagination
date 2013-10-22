@@ -45,6 +45,7 @@
 					}
 				}
 				
+				$this.addClass('initialized');
 				$this.data( 'st-pagination', data );
 				$this.stPagination( 'checkNext' );	
 				

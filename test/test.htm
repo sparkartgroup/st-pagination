@@ -8,26 +8,28 @@
 		html {
 			font-family: monospace;
 		}
+		pre {
+			margin: 0;
+		}
 	</style>
-
-	<script>
-		console = console || {};
-		var original_log = console.log;
-		console.log = function( msg ){
-			var txt = document.createTextNode( msg );
-			var br = document.createElement('br');
-			document.body.appendChild( txt );
-			document.body.appendChild( br );
-			original_log.apply( this, arguments );
-		};
-	</script>
-	<script src="./assets/test.js"></script>
 
 </head>
 <body>
 
 	<div id="mocha"></div>
 	<div id="test"></div>
+
+	<script>
+		console = console || {};
+		var original_log = console.log;
+		console.log = function( msg ){
+			var pre = document.createElement('pre');
+			pre.innerText = msg;
+			document.body.appendChild( pre );
+			original_log.apply( this, arguments );
+		};
+	</script>
+	<script src="./assets/test.js"></script>
 
 </body>
 </html>

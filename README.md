@@ -9,7 +9,7 @@ Storyteller Pagination enables you to create "endless" pagination by appending t
 
 ### Usage
 
-In order to use Storyteller Pagination, your page needs to be capable of loading dynamic content using a URL parameter (like /page/5, ?p=5, or ?skip=25). Your dynamic content needs to be in a `<div>` with a `<ul>` containing individual items as `<li>`s. Finally, your markup needs to have the `st-pagination`, `st-items`, and `st-next` classes, like so:
+In order to use Storyteller Pagination, your page needs to be capable of loading dynamic content using a URL parameter (like `/page/5`, `?p=5`, or `?skip=25`). In your markup, you need a container with an id (`#content` in this case), an element containing paginated elements (`.st-items`), and a next button (`.st-next`).
 
 ```html
 <div id="content" class="st-pagination" data-url="/page/:p">

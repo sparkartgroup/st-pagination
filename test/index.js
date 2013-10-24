@@ -1,4 +1,4 @@
-var $ = require('jquery');
+var $ = require('./assets/jquery.js');
 require('../jquery.st-pagination.js');
 require('./assets/jquery.mockjax.js');
 var test = require('tape');
@@ -25,6 +25,9 @@ $.mockjax({
 	},
 	responseTime: AJAX_RESPONSETIME
 });
+
+// add a test container element
+$('html').append('<div id="test"></div>');
 
 test( 'stPagination method exists on $', function( t ){
 	t.plan(1);

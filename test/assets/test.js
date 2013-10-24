@@ -15959,7 +15959,7 @@ if ( typeof window === "object" && typeof window.document === "object" ) {
 	};
 })(jQuery);
 },{}],32:[function(require,module,exports){
-var $ = require('jquery');
+var $ = require('./assets/jquery.js');
 require('../jquery.st-pagination.js');
 require('./assets/jquery.mockjax.js');
 var test = require('tape');
@@ -15986,6 +15986,9 @@ $.mockjax({
 	},
 	responseTime: AJAX_RESPONSETIME
 });
+
+// add a test container element
+$('html').append('<div id="test"></div>');
 
 test( 'stPagination method exists on $', function( t ){
 	t.plan(1);
@@ -16053,5 +16056,5 @@ test( 'stPagination appends the next set of items', function( t ){
 		}, AJAX_RESPONSETIME + 1 );
 	}, AJAX_RESPONSETIME + 1 );
 });
-},{"../jquery.st-pagination.js":1,"./assets/jquery.mockjax.js":31,"jquery":"MQ962V","tape":19}]},{},[32])
+},{"../jquery.st-pagination.js":1,"./assets/jquery.js":"MQ962V","./assets/jquery.mockjax.js":31,"tape":19}]},{},[32])
 ;

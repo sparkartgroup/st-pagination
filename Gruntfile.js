@@ -30,14 +30,17 @@ module.exports = function( grunt ){
 				}
 			}
 		},
+		jshint: {
+			script: ['jquery.st-pagination.js']
+		},
 		watch: {
 			script: {
 				files: ['jquery.st-pagination.js'],
-				tasks: ['uglify:script']
+				tasks: ['buildscript']
 			},
 			test: {
 				files: ['jquery.st-pagination.js','test/index.js'],
-				tasks: ['browserify:test']
+				tasks: ['buildtest']
 			}
 		}
 	});
@@ -48,7 +51,9 @@ module.exports = function( grunt ){
 	});
 
 	grunt.registerTask( 'default', ['dev'] );
-	grunt.registerTask( 'build', ['browserify','uglify'] );
+	grunt.registerTask( 'buildscript', ['jshint:script','uglify:script'] );
+	grunt.registerTask( 'buildtest', ['browserify:test'] );
+	grunt.registerTask( 'build', ['buildscript','buildtest'] );
 	grunt.registerTask( 'dev', ['build','watch'] );
 
 };

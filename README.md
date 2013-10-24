@@ -55,14 +55,14 @@ $(function(){
 
 ### Configuration
 
-**Configuration options can be set in two ways:** through `data` attributes on the parent `.st-pagination` element, or with a configuration object passed directly to the plugin.
+**Configuration options can be set in two ways:** through `data` attributes on the main element (the one `stPagination` is called on), or with a configuration object passed directly to the plugin.
 
 | Parameter | Type | Default | Purpose |
 | ----- | ----- | ----- | ----- |
 | **url** | `string` | `?p=:p` | The URL for the next page in the set, replacing the page number with ":p" |
 | **type** | `string` | `page` | Determines the type of pagination--can be `page`, for APIs that use page numbers, or `skip`, for APIs that skip a certain number of results. |
-| **start** | `integer` | 1 | What page/item number to start paginating from. |
-| **selectors** | `object` | `{ items: 'st-items', next: 'st-next' }` | An object of selector names and selector strings. `next` is the selector for the 'next' button, `items` is the selector for the container which items are appended to, and `item` is the selector for individual items. Use this to replace the default `st-items` and `st-next` classes. |
+| **start** | `integer` | `1` | What page/item number to start paginating from. |
+| **selectors** | `object` | `{...}` | An object of selector names and selector strings. `next` is the selector for the 'next' button, `items` is the selector for the container which items are appended to, and `item` is the selector for individual items. Use this to replace the default `st-items` and `st-next` classes. This cannot be set with a `data` attribute. |
 
 ```html
 <!-- Configuring a "skip" paginator with a default skip start -->

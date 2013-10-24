@@ -39,7 +39,7 @@ test( 'stPagination initializes on element', function( t ){
 });
 
 test( 'stPagination preloads the next set of items', function( t ){
-	t.plan(4);
+	t.plan(7);
 	$('#test').html( TEST_MARKUP[0] );
 	$('#paginate-me').stPagination({
 		url: '/test/:p'
@@ -51,6 +51,14 @@ test( 'stPagination preloads the next set of items', function( t ){
 		t.ok( $next.eq(0).text() === '4', 'first item contains "4"' );
 		t.ok( $next.eq(1).text() === '5', 'second item contains "5"' );
 		t.ok( $next.eq(2).text() === '6', 'second item contains "6"' );
-		$('#test').html('');
+		$('#paginate-me a.st-next').trigger('click');
+		setTimeout( function(){
+			var data = $('#paginate-me').data('st-pagination');
+			var $next = data.cache.next;
+			t.ok( $next.length === 2, 'three items in DOM cache' );
+			t.ok( $next.eq(0).text() === '7', 'first item contains "7"' );
+			t.ok( $next.eq(1).text() === '8', 'second item contains "8"' );
+			$('#test').html('');
+		}, AJAX_RESPONSETIME + 1 );
 	}, AJAX_RESPONSETIME + 1 );
 });

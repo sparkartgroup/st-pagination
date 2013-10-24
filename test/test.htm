@@ -16,16 +16,17 @@
 </head>
 <body>
 
-	<div id="mocha"></div>
+	<div id="log"></div>
 	<div id="test"></div>
 
 	<script>
 		console = console || {};
 		var original_log = console.log;
+		var log_el = document.getElementById('log');
 		console.log = function( msg ){
 			var pre = document.createElement('pre');
 			pre.innerText = msg;
-			document.body.appendChild( pre );
+			log_el.appendChild( pre );
 			original_log.apply( this, arguments );
 		};
 	</script>

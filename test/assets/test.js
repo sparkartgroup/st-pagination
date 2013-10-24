@@ -16026,5 +16026,32 @@ test( 'stPagination preloads the next set of items', function( t ){
 		}, AJAX_RESPONSETIME + 1 );
 	}, AJAX_RESPONSETIME + 1 );
 });
+
+test( 'stPagination appends the next set of items', function( t ){
+	t.ok(7);
+	$('#test').html( TEST_MARKUP[0] );
+	$('#paginate-me').stPagination({
+		url: '/test/:p'
+	});
+	setTimeout( function(){
+		$('#paginate-me .st-next').trigger('click');
+		var $items = $('#paginate-me .st-items > *');
+		t.ok( $items.length === 6, '6 items in DOM' );
+		t.ok( $items.eq(0).text() === '1', 'first item contains "1"' );
+		t.ok( $items.eq(1).text() === '2', 'second item contains "2"' );
+		t.ok( $items.eq(2).text() === '3', 'third item contains "3"' );
+		t.ok( $items.eq(3).text() === '4', 'fourth item contains "4"' );
+		t.ok( $items.eq(4).text() === '5', 'fifth item contains "5"' );
+		t.ok( $items.eq(5).text() === '6', 'sixth item contains "6"' );
+		setTimeout( function(){
+			$('#paginate-me .st-next').trigger('click');
+			var $items = $('#paginate-me .st-items > *');
+			t.ok( $items.length === 8, '8 items in DOM' );
+			t.ok( $items.eq(6).text() === '7', 'seventh item contains "7"' );
+			t.ok( $items.eq(7).text() === '8', 'eighth item contains "8"' );
+			$('#test').html('');
+		}, AJAX_RESPONSETIME + 1 );
+	}, AJAX_RESPONSETIME + 1 );
+});
 },{"../jquery.st-pagination.js":1,"./assets/jquery.mockjax.js":31,"jquery":"MQ962V","tape":19}]},{},[32])
 ;

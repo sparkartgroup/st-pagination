@@ -9,10 +9,10 @@ Storyteller Pagination enables you to create "endless" pagination by appending t
 
 ### Usage
 
-In order to use Storyteller Pagination, your page needs to be capable of loading dynamic content using a URL parameter (like `/page/5`, `?p=5`, or `?skip=25`). In your markup, you need a container with an id (`#content` in this case), an element containing paginated elements (`.st-items`), and a next button (`.st-next`).
+In order to use Storyteller Pagination, your page needs to be capable of loading dynamic content using a URL parameter (like `/page/5`, `?p=5`, or `?skip=25`). In your markup, you need a container with an id (`#content`), an element containing paginated elements (`.st-items`), and a next button (`.st-next`). The last two selectors can be configured.
 
 ```html
-<div id="content" class="st-pagination" data-url="/page/:p">
+<div id="content" class="pagination" data-url="/page/:p">
 	<ul class="st-items">
 		<!-- Your rendering loop should be here -->
 		<li><!-- Your content in here --></li>
@@ -21,36 +21,35 @@ In order to use Storyteller Pagination, your page needs to be capable of loading
 </div>
 ```
 
-This markup is the bare minumum necessary for Storyteller Pagination to work. **An id is required on the pagination div**. Please note that the "next" link does not necessarily need to be an `<a>`, it just needs the `st-next` class. From here, you can add basically any markup you want!
+This markup is the bare minumum necessary for pagination to work. **An id is required on the pagination div**. As long as you have an `id` on the containing element, an `st-items` class on the items element, and an `st-next` class on the next button, you can use any markup you want:
 
 ```html
-<div id="content" class="st-pagination" data-url="/page/:p">
+<div id="content" class="pagination" data-url="/page/:p">
 	<h1>My YouTube Favorites</h1>
 	<sub>A list of my favorite videos from all across YouTube!</sub>
 	<a class="st-next" href="#next">Next</a>
-	<ul class="st-items">
+	<section class="st-items">
 		{{#favorites}}
-		<li>
+		<article>
 			<h4>{{title}}</h4>
 			<img src="{{thumbnail}}" />
 			<var class="duration">{{duration}}</var>
 			<em class="author">{{author}}</em>
 			<p class="description">{{description}}</p>
 			<a href="{{link}}">Watch Now!</a>
-		</li>
+		</article>
 		{{/favorites}}
-	</ul>
+	</section>
 	<a class="st-next" href="#next">Next</a>
 </div>
 ```
 
-The code to start the plugin will also need to be run:
+The code to start the plugin itself will also need to be run:
 
 ```javascript
 $(function(){
-	
-	$('.st-pagination').stPagination();
-
+	// Since we gave all the containers the "st-pagination" class...
+	$('.pagination').stPagination();
 });
 ```
 

@@ -62,7 +62,8 @@ $(function(){
 | **url** | `string` | `?p=:p` | The URL for the next page in the set, replacing the page number with ":p" |
 | **type** | `string` | `page` | Determines the type of pagination--can be `page`, for APIs that use page numbers, or `skip`, for APIs that skip a certain number of results. |
 | **start** | `integer` | `1` | What page/item number to start paginating from. |
-| **selectors** | `object` | `{...}` | An object of selector names and selector strings. `next` is the selector for the 'next' button, `items` is the selector for the container which items are appended to, and `item` is the selector for individual items. Use this to replace the default `st-items` and `st-next` classes. This cannot be set with a `data` attribute. |
+| **selectors** | `object` | `{}` | An object of selector names and selector strings. `next` is the selector for the 'next' button, `items` is the selector for the container which items are appended to, and `item` is the selector for individual items. Use this to replace the default `st-items` and `st-next` classes. *This cannot be set with a `data` attribute.* |
+| **events** | `object` | `{}` | An object of event names and functions. This is basically just a shortcut for binding to these events with `.on()`. *This cannot be set with a `data` attribute.* |
 
 ```html
 <!-- Configuring a "skip" paginator with a default skip start -->
@@ -80,10 +81,12 @@ $('#content').stPagination({
 
 ### Events
 
-Storyteller Pagination makes some events available for better integration. The events are as follows:
+Storyteller Pagination makes the following events available:
 
-* **next** ( event, element ) - Fires when the 'next' method is triggered, either by a user click or manually.
-* **complete** ( event, element ) - Fires when the next page no longer returns results and the next button is disabled.
+| Event | Arguments | Purpose |
+| ----- | ----- | ----- |
+| **next** | ( `event`, `element` ) | Fires when the next set of elements is appended. |
+| **complete** | ( `event`, `element` ) | Fires when the next page no longer returns results and pagination is over. |
 
 These events can be bound in two ways: with an `events` object in the `stPagination()` configuration object, or with jQuery's normal event bindings.
 
@@ -102,8 +105,6 @@ $('.st-pagination').on({
 	complete: function( event, element ){ console.log( 'complete', event, element ); }
 });
 ```
-
-*Events cannot be bound using `data` attributes.
 
 ### License
 

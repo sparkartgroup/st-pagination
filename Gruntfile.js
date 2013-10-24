@@ -21,13 +21,23 @@ module.exports = function( grunt ){
 			}
 		},
 		uglify: {
-			build: {
+			script: {
 				options: {
 					banner: banner
 				},
 				files: {
 					'jquery.st-pagination.min.js': 'jquery.st-pagination.js'
 				}
+			}
+		},
+		watch: {
+			script: {
+				files: ['jquery.st-pagination.js'],
+				tasks: ['uglify:script']
+			},
+			test: {
+				files: ['jquery.st-pagination.js','test/index.js'],
+				tasks: ['browserify:test']
 			}
 		}
 	});
@@ -39,6 +49,6 @@ module.exports = function( grunt ){
 
 	grunt.registerTask( 'default', ['dev'] );
 	grunt.registerTask( 'build', ['browserify','uglify'] );
-	grunt.registerTask( 'dev', ['build'] );
+	grunt.registerTask( 'dev', ['build','watch'] );
 
 };

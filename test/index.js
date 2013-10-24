@@ -11,6 +11,9 @@ var TEST_MARKUP = [
 	'<div id="paginate-me"><ul class="st-items"></ul><a class="st-next" href="#next">Next</a></div>'
 ];
 
+// don't log mockjax data
+$.mockjaxSettings.log = function(){};
+
 $.mockjax({
 	url: /^\/test\/(.+)/,
 	urlParams: ['page'],

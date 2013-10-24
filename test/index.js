@@ -70,7 +70,7 @@ test( 'stPagination preloads the next set of items', function( t ){
 });
 
 test( 'stPagination appends the next set of items', function( t ){
-	t.ok(7);
+	t.plan(10);
 	$('#test').html( TEST_MARKUP[0] );
 	$('#paginate-me').stPagination({
 		url: '/test/:p'

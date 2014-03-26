@@ -100,6 +100,9 @@ $('.st-pagination').stPagination({
 });
 
 // Binding with normal events
+$('.st-pagination').on( 'next', function( event, element ){ console.log( 'next', event, element ); });
+
+// ... and with an events object
 $('.st-pagination').on({
 	next: function( event, element ){ console.log( 'next', event, element ); },
 	complete: function( event, element ){ console.log( 'complete', event, element ); }

@@ -16029,6 +16029,32 @@ test( 'stPagination binds events passed in configuration', function( t ){
 		.trigger('previous');
 });
 
+test( 'stPagination triggers events', function( t ){
+	t.plan(3);
+	$('#test').html( TEST_MARKUP[0] );
+	$('#paginate-me')
+		.stPagination({
+			url: '/test/:p'
+		})
+		.on({
+			next: function(){
+				t.pass('triggers "next" event');
+			},
+			complete: function(){
+				t.pass('triggers "previous" event');
+			}
+		});
+	setTimeout( function(){
+		$('#paginate-me a.st-next').trigger('click');
+		setTimeout( function(){
+			$('#paginate-me a.st-next').trigger('click');
+			setTimeout( function(){
+				$('#paginate-me a.st-next').trigger('click');
+			}, AJAX_RESPONSETIME + 1 );
+		}, AJAX_RESPONSETIME + 1 );
+	}, AJAX_RESPONSETIME + 1 );
+});
+
 test( 'stPagination preloads the next set of items', function( t ){
 	t.plan(7);
 	$('#test').html( TEST_MARKUP[0] );

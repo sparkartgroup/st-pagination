@@ -85,8 +85,8 @@ Storyteller Pagination makes the following events available:
 
 | Event | Arguments | Purpose |
 | ----- | ----- | ----- |
-| **next** | ( `event`, `element` ) | Fires when the next set of elements is appended. |
-| **complete** | ( `event`, `element` ) | Fires when the next page no longer returns results and pagination is over. |
+| **next** | `event`, `element` | Fires when the next set of elements is appended. |
+| **complete** | `event`, `element` | Fires when the next page no longer returns results and pagination is over. |
 
 These events can be bound in two ways: with an `events` object in the `stPagination()` configuration object, or with jQuery's normal event bindings.
 

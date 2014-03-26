@@ -6,6 +6,18 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
 	"use strict";
 	
 	var PARAMETER_TOKEN = ':p';
+
+	// Utility method for binding Events passed in a config object
+	var bindEvents = function( $el, events ){
+		if( events ){
+			for( var event in events ){
+				if( events.hasOwnProperty( event ) ){
+					var method = events[event];
+					$el.on( event, method );
+				}
+			}
+		}
+	};
 	
 	var methods = {
 		
@@ -37,14 +49,7 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
 				};
 				
 				// Bind passed events
-				if( options.events ){
-					for( var event in options.events ){
-						if( options.events.hasOwnProperty( event ) ){
-							var method = options.events[event];
-							$this.on( event, method );
-						}
-					}
-				}
+				bindEvents( $this, options.events );
 				
 				$this.addClass('initialized');
 				$this.data( 'st-pagination', data );
@@ -16003,6 +16008,25 @@ test( 'stPagination initializes on element', function( t ){
 	});
 	t.ok( $('#paginate-me').is('.initialized'), 'Adds initialized class' );
 	$('#test').html('');
+});
+
+test( 'stPagination binds events passed in configuration', function( t ){
+	t.plan(2);
+	$('#test').html( TEST_MARKUP[0] );
+	$('#paginate-me').stPagination({
+		url: '/test/:p',
+		events: {
+			next: function(){
+				t.pass('binds "next" event');
+			},
+			previous: function(){
+				t.pass('binds "previous" event');
+			}
+		}
+	});
+	$('#paginate-me')
+		.trigger('next')
+		.trigger('previous');
 });
 
 test( 'stPagination preloads the next set of items', function( t ){

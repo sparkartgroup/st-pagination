@@ -44,6 +44,25 @@ test( 'stPagination initializes on element', function( t ){
 	$('#test').html('');
 });
 
+test( 'stPagination binds events passed in configuration', function( t ){
+	t.plan(2);
+	$('#test').html( TEST_MARKUP[0] );
+	$('#paginate-me').stPagination({
+		url: '/test/:p',
+		events: {
+			next: function(){
+				t.pass('binds "next" event');
+			},
+			previous: function(){
+				t.pass('binds "previous" event');
+			}
+		}
+	});
+	$('#paginate-me')
+		.trigger('next')
+		.trigger('previous');
+});
+
 test( 'stPagination preloads the next set of items', function( t ){
 	t.plan(7);
 	$('#test').html( TEST_MARKUP[0] );

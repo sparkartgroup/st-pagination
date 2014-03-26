@@ -5,6 +5,18 @@
 	"use strict";
 	
 	var PARAMETER_TOKEN = ':p';
+
+	// Utility method for binding Events passed in a config object
+	var bindEvents = function( $el, events ){
+		if( events ){
+			for( var event in events ){
+				if( events.hasOwnProperty( event ) ){
+					var method = events[event];
+					$el.on( event, method );
+				}
+			}
+		}
+	};
 	
 	var methods = {
 		
@@ -36,14 +48,7 @@
 				};
 				
 				// Bind passed events
-				if( options.events ){
-					for( var event in options.events ){
-						if( options.events.hasOwnProperty( event ) ){
-							var method = options.events[event];
-							$this.on( event, method );
-						}
-					}
-				}
+				bindEvents( $this, options.events );
 				
 				$this.addClass('initialized');
 				$this.data( 'st-pagination', data );

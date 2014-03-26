@@ -53,14 +53,14 @@ test( 'stPagination binds events passed in configuration', function( t ){
 			next: function(){
 				t.pass('binds "next" event');
 			},
-			previous: function(){
-				t.pass('binds "previous" event');
+			complete: function(){
+				t.pass('binds "complete" event');
 			}
 		}
 	});
 	$('#paginate-me')
 		.trigger('next')
-		.trigger('previous');
+		.trigger('complete');
 });
 
 test( 'stPagination triggers events', function( t ){
@@ -75,7 +75,7 @@ test( 'stPagination triggers events', function( t ){
 				t.pass('triggers "next" event');
 			},
 			complete: function(){
-				t.pass('triggers "previous" event');
+				t.pass('triggers "complete" event');
 			}
 		});
 	setTimeout( function(){
